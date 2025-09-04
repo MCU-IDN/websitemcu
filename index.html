@@ -1,619 +1,236 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PT. MEGA CELLPIA UTAMA - Solusi AI untuk Peningkatan Kualitas MRI</title>
+    <title>SwiftMR - PT. Mega Cellpia Utama</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#2563eb',
-                        secondary: '#1e40af',
-                        accent: '#3b82f6',
-                        medical: '#10b981',
-                        dark: '#1f2937',
-                        light: '#f8fafc'
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             font-family: 'Inter', sans-serif;
         }
-        
-        body {
-            overflow-x: hidden;
+        .gradient-text {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        .medical-gradient {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
-        
-        .service-card {
-            transition: all 0.3s ease;
-            border: 1px solid #e5e7eb;
+        .section-padding {
+            padding: 5rem 0;
         }
-        
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            border-color: #3b82f6;
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
-        
-        .stats-gradient {
-            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
         }
-        
-        .testimonial-card {
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(102, 126, 234, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(102, 126, 234, 1); }
         }
-        
-        .nav-scroll {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .mobile-menu {
-            transition: all 0.3s ease;
-        }
-        
-        .ai-animation {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .mri-comparison {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .comparison-slider {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: #2563eb;
-            left: 50%;
-            transform: translateX(-50%);
-            cursor: ew-resize;
-        }
-        
-        .comparison-slider::after {
-            content: '';
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: #2563eb;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="text-gray-800 scrollbar-hide">
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 transition-all duration-300 bg-white shadow-sm" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <div class="text-xl font-bold text-primary">MCU</div>
-                    <div class="ml-2 text-sm text-gray-600 hidden md:block">PT. MEGA CELLPIA UTAMA</div>
-                </div>
-                
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-gray-700 hover:text-primary font-medium transition-colors">Beranda</a>
-                    <a href="#about" class="text-gray-700 hover:text-primary font-medium transition-colors">Tentang</a>
-                    <a href="#technology" class="text-gray-700 hover:text-primary font-medium transition-colors">Teknologi</a>
-                    <a href="#benefits" class="text-gray-700 hover:text-primary font-medium transition-colors">Manfaat</a>
-                    <a href="#contact" class="text-gray-700 hover:text-primary font-medium transition-colors">Kontak</a>
-                </div>
-                
-                <div class="md:hidden">
-                    <button id="menu-toggle" class="text-gray-700">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
+    <nav class="bg-white shadow-lg fixed top-0 w-full z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="text-2xl font-bold gradient-text">SwiftMR</div>
+                <span class="ml-2 text-sm text-gray-600">by PT. Mega Cellpia Utama</span>
             </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#overview" class="text-gray-600 hover:text-purple-600 transition">Overview</a>
+                <a href="#specs" class="text-gray-600 hover:text-purple-600 transition">Specifications</a>
+                <a href="#demo" class="text-gray-600 hover:text-purple-600 transition">Demo</a>
+                <a href="#support" class="text-gray-600 hover:text-purple-600 transition">Support</a>
+            </div>
+            <button id="menu-toggle" class="md:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-nav" class="md:hidden hidden bg-gray-100 px-6 py-4">
+            <a href="#overview" class="block py-2 text-gray-600 hover:text-purple-600">Overview</a>
+            <a href="#specs" class="block py-2 text-gray-600 hover:text-purple-600">Specifications</a>
+            <a href="#demo" class="block py-2 text-gray-600 hover:text-purple-600">Demo</a>
+            <a href="#support" class="block py-2 text-gray-600 hover:text-purple-600">Support</a>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 w-full h-0 bg-white overflow-hidden md:hidden z-40">
-        <div class="p-6">
-            <div class="flex justify-between items-center mb-8">
-                <div class="text-xl font-bold text-primary">MCU</div>
-                <button id="menu-close" class="text-gray-700">
-                    <i class="fas fa-times text-2xl"></i>
-                </button>
-            </div>
-            <div class="space-y-6">
-                <a href="#home" class="block text-gray-700 hover:text-primary font-medium text-lg">Beranda</a>
-                <a href="#about" class="block text-gray-700 hover:text-primary font-medium text-lg">Tentang</a>
-                <a href="#technology" class="block text-gray-700 hover:text-primary font-medium text-lg">Teknologi</a>
-                <a href="#benefits" class="block text-gray-700 hover:text-primary font-medium text-lg">Manfaat</a>
-                <a href="#contact" class="block text-gray-700 hover:text-primary font-medium text-lg">Kontak</a>
-            </div>
-        </div>
-    </div>
-
     <!-- Hero Section -->
-    <section id="home" class="pt-24 pb-20 md:pt-32 md:pb-28 bg-gradient-to-br from-blue-900 to-blue-700 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="text-white">
-                    <div class="inline-flex items-center px-4 py-2 bg-blue-800 rounded-full mb-6">
-                        <i class="fas fa-brain mr-2 text-blue-300"></i>
-                        <span class="text-sm font-medium">Powered by Deep Learning AI</span>
+    <section id="overview" class="pt-24 section-padding bg-gray-50">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 gradient-text">SwiftMR: AI-Powered MRI Accelerator</h1>
+            <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">Transform your MRI workflows with SwiftMR, the revolutionary AI software from PT. Mega Cellpia Utama. Accelerate scans, sharpen reconstructions, and deliver precise diagnostics compatible with all MRI brands and models.</p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <a href="#demo" class="bg-purple-600 text-white px-8 py-3 rounded-full hover:bg-purple-700 transition transform hover:scale-105">Schedule Demo</a>
+                <button id="download-btn" class="bg-white border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-full hover:bg-purple-50 transition">Download Brochure</button>
+            </div>
+        </div>
+        <div class="mt-16 flex justify-center">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dadd0d96-692c-46e8-a7a5-d569ecb7fabe.png" alt="Professional medical technician operating an MRI machine with SwiftMR software on a large monitor displaying enhanced brain scans, in a modern clinical environment with blue lighting and subtle AI overlays" class="w-full max-w-5xl rounded-lg shadow-2xl card-hover" onerror="this.style.background='linear-gradient(135deg, #e0e0e0, #999999)'; this.style.backgroundSize='cover'; this.alt='Faded medical technology illustration';" />
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="section-padding bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Why Choose SwiftMR?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center card-hover bg-gray-50 p-6 rounded-lg">
+                    <div class="mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c919295e-6229-4ebe-ad80-e74c25c6fae5.png" alt="Shiny gear icon representing speed and acceleration" class="w-16 h-16 mx-auto pulse-glow" />
                     </div>
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                        Revolusi Kualitas Gambar MRI dengan Kecerdasan Buatan
-                    </h1>
-                    <p class="text-xl mb-8 text-blue-100">
-                        Teknologi Deep Learning kami meningkatkan kualitas gambar MRI secara signifikan, mempercepat pemeriksaan, dan meningkatkan kenyamanan pasien serta radiolog.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#contact" class="bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                            Konsultasi Gratis
-                        </a>
-                        <a href="#technology" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors">
-                            Pelajari Teknologi
-                        </a>
-                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Up to 50% Faster Scans</h3>
+                    <p class="text-gray-600">Reduce scan times significantly while maintaining high image quality.</p>
                 </div>
-                <div class="relative">
-                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl ai-animation">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3ffc9a6e-30df-4055-ba11-28d03e3168bb.png" alt="Ilustrasi teknologi AI deep learning yang meningkatkan kualitas gambar MRI dengan visualisasi sebelum dan sesudah peningkatan" class="w-full h-auto" onerror="this.style.display='none'" />
+                <div class="text-center card-hover bg-gray-50 p-6 rounded-lg">
+                    <div class="mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9fb9bc7d-1fad-4a3d-91d2-c5abe7a170d2.png" alt="Crystal clear magnifier lens icon symbolizing sharpness" class="w-16 h-16 mx-auto pulse-glow" />
                     </div>
-                    <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-blue-400 rounded-full opacity-20"></div>
-                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-blue-300 rounded-full opacity-30"></div>
+                    <h3 class="text-xl font-semibold mb-2">Sharper Reconstructions</h3>
+                    <p class="text-gray-600">AI-enhanced algorithms deliver pinpoint accuracy in image reconstruction.</p>
+                </div>
+                <div class="text-center card-hover bg-gray-50 p-6 rounded-lg">
+                    <div class="mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/799b136f-52d9-4f85-bab7-e422eea93fdf.png" alt="Open compatibility plug icon" class="w-16 h-16 mx-auto pulse-glow" />
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Universal Compatibility</h3>
+                    <p class="text-gray-600">Seamlessly integrates with all MRI brands and models worldwide.</p>
+                </div>
+                <div class="text-center card-hover bg-gray-50 p-6 rounded-lg">
+                    <div class="mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d176ad2f-3bf8-4b6a-8615-ef0d59ddd93f.png" alt="Shield icon denoting security and compliance" class="w-16 h-16 mx-auto pulse-glow" />
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Regulatory Compliant</h3>
+                    <p class="text-gray-600">Fully compliant with FDA regulations and international standards.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div class="p-6">
-                    <div class="text-3xl md:text-4xl font-bold text-primary mb-2">60%</div>
-                    <div class="text-gray-600">Pengurangan Waktu Pemeriksaan</div>
-                </div>
-                <div class="p-6">
-                    <div class="text-3xl md:text-4xl font-bold text-primary mb-2">45%</div>
-                    <div class="text-gray-600">Peningkatan Kualitas Gambar</div>
-                </div>
-                <div class="p-6">
-                    <div class="text-3xl md:text-4xl font-bold text-primary mb-2">50+</div>
-                    <div class="text-gray-600">Rumah Sakit Mitra</div>
-                </div>
-                <div class="p-6">
-                    <div class="text-3xl md:text-4xl font-bold text-primary mb-2">99.8%</div>
-                    <div class="text-gray-600">Akurasi Diagnosis</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Tentang PT. MEGA CELLPIA UTAMA</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Perusahaan pionir dalam pengembangan solusi AI untuk dunia kesehatan di Indonesia
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="relative">
-                    <div class="rounded-2xl overflow-hidden shadow-xl">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/44abcada-3984-469a-a67d-9d4ab7b7f9b1.png" alt="Tim profesional PT. Mega Cellpia Utama yang terdiri dari ahli AI, radiolog, dan engineer dalam lingkungan kerja modern" class="w-full h-auto" onerror="this.style.display='none'" />
+    <!-- Specs -->
+    <section id="specs" class="section-padding bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Technical Specifications</h2>
+            <div class="bg-white p-8 rounded-lg shadow-xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-purple-600">Supported Platforms</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-center"><span class="w-2 h-2 bg-purple-600 rounded-full mr-3"></span> Siemens MRI Systems (All Models)</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-purple-600 rounded-full mr-3"></span> GE Healthcare MRI Systems</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-purple-600 rounded-full mr-3"></span> Philips MRI Systems</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-purple-600 rounded-full mr-3"></span> Toshiba/Canon MRI Systems</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-purple-600 rounded-full mr-3"></span> Other OEM Models Upon Request</li>
+                        </ul>
                     </div>
-                    <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-primary rounded-lg opacity-10"></div>
-                </div>
-                
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Visi Kami</h3>
-                    <p class="text-gray-700 mb-6">
-                        PT. MEGA CELLPIA UTAMA (MCU) berkomitmen untuk mentransformasi layanan kesehatan melalui inovasi teknologi kecerdasan buatan. Kami menghadirkan solusi canggih yang meningkatkan akurasi diagnosis dan efisiensi pemeriksaan medis.
-                    </p>
-                    
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="bg-primary p-2 rounded-lg mr-4">
-                                <i class="fas fa-check text-white"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">Tim Ahli</h4>
-                                <p class="text-gray-600">Dikembangkan oleh ahli AI dan radiolog berpengalaman</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-primary p-2 rounded-lg mr-4">
-                                <i class="fas fa-check text-white"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">Standar Tinggi</h4>
-                                <p class="text-gray-600">Memenuhi standar medis internasional yang ketat</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-primary p-2 rounded-lg mr-4">
-                                <i class="fas fa-check text-white"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">Inovasi Berkelanjutan</h4>
-                                <p class="text-gray-600">Terus mengembangkan teknologi untuk masa depan kesehatan</p>
-                            </div>
-                        </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-purple-600">System Requirements</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-center"><span class="w-2 h-2 bg-purple-600 rounded-full mr-3"></span> Operating System: Windows 10/11, Linux</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-purple-600 rounded-full mr-3"></span> RAM: Minimum 16GB (Recommended 32GB)</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-purple-600 rounded-full mr-3"></span> GPU: NVIDIA CUDA-enabled Graphics Card</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-purple-600 rounded-full mr-3"></span> Storage: 50GB Available Space</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Technology Section -->
-    <section id="technology" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Teknologi Deep Learning Kami</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Mengubah cara dunia melihat dan menganalisis gambar MRI
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Bagaimana AI Kami Bekerja</h3>
-                    <p class="text-gray-700 mb-6">
-                        Teknologi Deep Learning kami menggunakan jaringan saraf convolutional yang telah dilatih dengan jutaan gambar MRI untuk secara otomatis meningkatkan kualitas gambar, mengurangi noise, dan meningkatkan kontras.
-                    </p>
-                    
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-database text-blue-600"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">Dataset Besar</h4>
-                                <p class="text-gray-600">Dilatih dengan database gambar MRI terbesar di Asia Tenggara</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-brain text-blue-600"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">Algoritma Canggih</h4>
-                                <p class="text-gray-600">Menggunakan algoritma deep learning state-of-the-art</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-shield-alt text-blue-600"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">Aman & Terpercaya</h4>
-                                <p class="text-gray-600">Data pasien sepenuhnya terenkripsi dan terproteksi</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="relative">
-                    <div class="rounded-2xl overflow-hidden shadow-xl">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/619ed2fb-dc40-403f-a532-f823e55f0132.png" alt="Diagram alur kerja deep learning AI yang menunjukkan proses peningkatan gambar MRI dari input hingga output berkualitas tinggi" class="w-full h-auto" onerror="this.style.display='none'" />
-                    </div>
-                </div>
-            </div>
-            
-            <!-- MRI Comparison -->
-            <div class="bg-gray-50 rounded-2xl p-8">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">Perbandingan Hasil Gambar MRI</h3>
-                <div class="mri-comparison relative rounded-lg overflow-hidden shadow-lg" style="height: 400px;">
-                    <div class="absolute inset-0">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/89163516-acef-4c66-9a0c-e094bc7ac50d.png" alt="Gambar MRI sebelum peningkatan kualitas dengan AI - menunjukkan gambaran yang lebih buram dan kurang detail" class="w-full h-full object-cover" style="filter: blur(2px) contrast(0.8)" onerror="this.style.display='none'" />
-                    </div>
-                    <div class="absolute inset-0" style="width: 50%; overflow: hidden;">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7e32b17b-1216-44ed-8442-91306559f3b7.png" alt="Gambar MRI setelah peningkatan kualitas dengan AI - menunjukkan gambaran yang lebih tajam, jelas, dan detail yang diperkuat" class="w-full h-full object-cover" onerror="this.style.display='none'" />
-                    </div>
-                    <div class="comparison-slider"></div>
-                </div>
-                <div class="grid grid-cols-2 gap-4 mt-4">
+    <!-- Demo -->
+    <section id="demo" class="section-padding bg-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-6 gradient-text">Experience SwiftMR in Action</h2>
+            <p class="text-xl text-gray-600 mb-8">Watch our interactive demo to see how SwiftMR transforms MRI scanning.</p>
+            <div class="bg-gray-100 p-8 rounded-lg shadow-lg">
+                <div id="demo-placeholder" class="aspect-video bg-gray-300 rounded flex items-center justify-center">
                     <div class="text-center">
-                        <div class="text-sm font-semibold text-gray-600">Sebelum AI</div>
-                        <div class="text-xs text-gray-500">Gambar standar MRI</div>
+                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <p class="text-gray-600">Interactive Demo Placeholder</p>
+                        <button class="mt-4 bg-purple-600 text-white px-6 py-2 rounded hover:bg-purple-700" onclick="playDemo()">Play Demo</button>
                     </div>
-                    <div class="text-center">
-                        <div class="text-sm font-semibold text-green-600">Sesudah AI</div>
-                        <div class="text-xs text-green-500">Ditingkatkan dengan Deep Learning</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section id="benefits" class="py-20 medical-gradient text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Manfaat untuk Semua Pihak</h2>
-                <p class="text-xl text-green-100 max-w-3xl mx-auto">
-                Solusi yang menguntungkan pasien, radiolog, dan institusi kesehatan
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white bg-opacity-10 p-8 rounded-xl backdrop-blur-sm">
-                    <div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center mb-6 mx-auto">
-                        <i class="fas fa-user-injured text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-center mb-4">Untuk Pasien</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-300 mr-3 mt-1"></i>
-                            <span>Waktu pemeriksaan lebih singkat</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-300 mr-3 mt-1"></i>
-                            <span>Kenyamanan selama pemeriksaan</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-300 mr-3 mt-1"></i>
-                            <span>Diagnosis yang lebih akurat</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-300 mr-3 mt-1"></i>
-                            <span>Pengurangan paparan radiasi</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="bg-white bg-opacity-10 p-8 rounded-xl backdrop-blur-sm">
-                    <div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center mb-6 mx-auto">
-                        <i class="fas fa-user-md text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-center mb-4">Untuk Radiolog</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-300 mr-3 mt-1"></i>
-                            <span>Gambar yang lebih jelas dan detail</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-300 mr-3 mt-1"></i>
-                            <span>Proses analisis yang lebih cepat</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-300 mr-3 mt-1"></i>
-                            <span>Alat bantu diagnosis yang canggih</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-300 mr-3 mt-1"></i>
-                            <span>Pengurangan beban kerja</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="bg-white bg-opacity-10 p-8 rounded-xl backdrop-blur-sm">
-                    <div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center mb-6 mx-auto">
-                        <i class="fas fa-hospital text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-center mb-4">Untuk Rumah Sakit</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-300 mr-3 mt-1"></i>
-                            <span>Efisiensi operasional meningkat</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-300 mr-3 mt-1"></i>
-                            <span>Kapasitas pasien lebih banyak</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-300 mr-3 mt-1"></i>
-                            <span>Biaya operasional berkurang</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-green-300 mr-3 mt-1"></i>
-                            <span>Reputasi sebagai pusat kesehatan modern</span>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Apa Kata Mereka</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Testimonial dari mitra dan pengguna teknologi kami
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="testimonial-card p-8 rounded-xl">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                        <div>
-                            <h4 class="font-bold text-gray-900">Dr. Ahmad Rizki</h4>
-                            <p class="text-gray-600">Radiolog Senior, RS Premier Jakarta</p>
-                        </div>
+    <section class="section-padding bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Customer Testimonials</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg card-hover">
+                    <div class="mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f7a98cfa-773f-4d0e-a03b-8f0982b71c70.png" alt="Young female doctor with professional attire and glasses" class="w-16 h-16 rounded-full" />
                     </div>
-                    <p class="text-gray-700 italic">
-                        "Teknologi dari MCU benar-benar mengubah cara kami bekerja. Gambar MRI menjadi jauh lebih jelas, dan waktu pemeriksaan berkurang signifikan."
-                    </p>
-                    <div class="flex mt-4">
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                    </div>
+                    <p class="text-gray-700 mb-4 italic">"SwiftMR has cut our scan times in half and improved diagnostic accuracy tremendously."</p>
+                    <cite class="text-purple-600 font-semibold">- Dr. Sarah Chen, Radiology Director</cite>
                 </div>
-                
-                <div class="testimonial-card p-8 rounded-xl">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                        <div>
-                            <h4 class="font-bold text-gray-900">Maria Sari</h4>
-                            <p class="text-gray-600">Manajer, RS Siloam Surabaya</p>
-                        </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg card-hover">
+                    <div class="mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dcca5cca-b272-496b-86db-8efe9b623d7f.png" alt="Middle-aged male physician in lab coat" class="w-16 h-16 rounded-full" />
                     </div>
-                    <p class="text-gray-700 italic">
-                        "Setelah implementasi solusi MCU, kapasitas MRI kami meningkat 40% tanpa penambahan peralatan. Sangat mengesankan!"
-                    </p>
-                    <div class="flex mt-4">
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                    </div>
+                    <p class="text-gray-700 mb-4 italic">"The universal compatibility is a game-changer for our multi-vendor setup."</p>
+                    <cite class="text-purple-600 font-semibold">- Prof. Michael Torres, Chief of Imaging</cite>
                 </div>
-                
-                <div class="testimonial-card p-8 rounded-xl">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                        <div>
-                            <h4 class="font-bold text-gray-900">Budi Santoso</h4>
-                            <p class="text-gray-600">Pasien</p>
-                        </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg card-hover">
+                    <div class="mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bd4dc4ed-b70a-499e-be00-2f92a6c5c253.png" alt="Female hospital administrator with clipboard" class="w-16 h-16 rounded-full" />
                     </div>
-                    <p class="text-gray-700 italic">
-                        "Pemeriksaan MRI yang biasanya membuat tidak nyaman sekarang menjadi cepat dan nyaman. Hasilnya juga sangat jelas."
-                    </p>
-                    <div class="flex mt-4">
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                        <i class="fas fa-star text-yellow-400"></i>
-                    </div>
+                    <p class="text-gray-700 mb-4 italic">"SwiftMR's AI accuracy has reduced our interpretation time and errors."</p>
+                    <cite class="text-purple-600 font-semibold">- Dr. Lisa Wang, Medical Vice President</cite>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 bg-primary text-white">
-        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Siap Mengtransformasi Layanan MRI Anda?</h2>
-            <p class="text-xl mb-8 text-blue-100">
-                Jadilah bagian dari revolusi kesehatan digital dengan teknologi AI terdepan dari PT. MEGA CELLPIA UTAMA
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#contact" class="bg-white text-primary px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                    Jadwalkan Demo
-                </a>
-                <a href="#contact" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors">
-                    Hubungi Kami
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-12">
+    <!-- Contact/Support -->
+    <section id="support" class="section-padding bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Hubungi Kami</h2>
-                    <p class="text-gray-300 mb-8">
-                        Tertarik dengan solusi kami? Tim kami siap membantu Anda menerapkan teknologi AI dalam layanan MRI.
-                    </p>
-                    
-                    <div class="space-y-6">
+                    <h2 class="text-4xl font-bold mb-6 gradient-text">Get Support</h2>
+                    <p class="text-gray-600 mb-8">Our expert team is here to help you integrate SwiftMR seamlessly into your workflow.</p>
+                    <div class="space-y-4">
                         <div class="flex items-center">
-                            <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold">Alamat</h4>
-                                <p class="text-gray-300">Jl. Teknologi No. 123<br>Jakarta Selatan, 12540</p>
-                            </div>
+                            <svg class="w-6 h-6 text-purple-600 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                            <span>24/7 Support: +62-123-456-7890</span>
                         </div>
-                        
                         <div class="flex items-center">
-                            <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold">Telepon</h4>
-                                <p class="text-gray-300">+62 21 1234 5678</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold">Email</h4>
-                                <p class="text-gray-300">info@megacellpiautama.co.id</p>
-                            </div>
+                            <svg class="w-6 h-6 text-purple-600 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            <span>support@mega-cellpia-utama.com</span>
                         </div>
                     </div>
                 </div>
-                
                 <div>
-                    <form class="bg-white p-8 rounded-xl text-gray-900">
-                        <div class="mb-6">
-                            <label class="block text-gray-700 mb-2 font-medium">Nama Lengkap</label>
-                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary" placeholder="Masukkan nama Anda">
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label class="block text-gray-700 mb-2 font-medium">Email</label>
-                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary" placeholder="Masukkan email Anda">
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label class="block text-gray-700 mb-2 font-medium">Nomor Telepon</label>
-                            <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary" placeholder="Masukkan nomor telepon">
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label class="block text-gray-700 mb-2 font-medium">Pesan</label>
-                            <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary h-32" placeholder="Jelaskan kebutuhan Anda"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="w-full bg-primary text-white py-4 rounded-lg font-semibold hover:bg-secondary transition-colors">
-                            Kirim Pesan
-                        </button>
+                    <h3 class="text-2xl font-bold mb-4">Request Information</h3>
+                    <form id="support-form" class="space-y-4">
+                        <input type="text" placeholder="Your Name" class="w-full p-3 border rounded-lg" required>
+                        <input type="email" placeholder="Your Email" class="w-full p-3 border rounded-lg" required>
+                        <textarea placeholder="Your Message" rows="4" class="w-full p-3 border rounded-lg" required></textarea>
+                        <button type="submit" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition">Send Message</button>
+                        <div id="support-success" class="text-green-600 hidden mt-4">Thank you! We'll respond shortly.</div>
                     </form>
                 </div>
             </div>
@@ -622,29 +239,103 @@
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="text-xl font-bold mb-6">PT. MEGA CELLPIA UTAMA</h3>
-                    <p class="text-gray-400 mb-6">
-                        Menyediakan solusi AI terdepan untuk peningkatan kualitas gambar MRI dan efisiensi pemeriksaan medis.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
+                    <div class="text-2xl font-bold mb-4">SwiftMR</div>
+                    <p class="text-gray-400">Revolutionizing MRI through AI innovation by PT. Mega Cellpia Utama.</p>
                 </div>
-                
                 <div>
-                    <h4 class="font-semibold mb-6">Tautan Cepat</h4>
-                    <u
+                    <h4 class="font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#overview" class="hover:text-white">Overview</a></li>
+                        <li><a href="#specs" class="hover:text-white">Specifications</a></li>
+                        <li><a href="#demo" class="hover:text-white">Demo</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#support" class="hover:text-white">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white">FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>About PT. MCU</li>
+                        <li>Careers</li>
+                        <li>Privacy Policy</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                © 2023 PT. Mega Cellpia Utama. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation toggle
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('mobile-nav').classList.toggle('hidden');
+        });
+
+        // Scroll to sections
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Download/Demo buttons
+        document.getElementById('download-btn').addEventListener('click', () => {
+            alert('Download starting... (This would trigger a file download in a real implementation)');
+        });
+
+        function playDemo() {
+            const demo = document.getElementById('demo-placeholder');
+            demo.innerHTML = '<p class="text-gray-600">Demo playing... <a href="#" class="text-purple-600">Close</a></p>';
+            demo.querySelector('a').addEventListener('click', (e) => {
+                e.preventDefault();
+                location.reload(); // Simple reset for demo
+            });
+        }
+
+        // Form submission
+        document.getElementById('support-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('support-success').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('support-form').reset();
+                document.getElementById('support-success').classList.add('hidden');
+            }, 3000);
+        });
+
+        // Animation on scroll (Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'animate-pulse');
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.card-hover').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Ensure responsive behavior
+        window.addEventListener('resize', () => {
+            // Any responsive adjustments here
+        });
+    </script>
+</body>
+</html>
+</content>
+</create_file>
